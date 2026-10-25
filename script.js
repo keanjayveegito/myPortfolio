@@ -61,3 +61,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Certificate Modal Functionality
+const modal = document.getElementById('certificateModal');
+const modalImage = document.getElementById('certificateImage');
+const closeModal = document.querySelector('.close-modal');
+const certificateBtns = document.querySelectorAll('.view-certificate-btn');
+
+// Open modal when certificate button is clicked
+certificateBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const certificatePath = btn.getAttribute('data-certificate');
+        modalImage.src = certificatePath;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+// Close modal when X is clicked
+closeModal.addEventListener('click', () => {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+});
+
+// Close modal when clicking outside the image
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
