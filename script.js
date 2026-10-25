@@ -99,3 +99,41 @@ document.addEventListener('keydown', (e) => {
         document.body.style.overflow = 'auto';
     }
 });
+
+// Gallery Modal Functionality
+const galleryModal = document.getElementById('galleryModal');
+const galleryModalImage = document.getElementById('galleryImage');
+const closeGalleryModal = document.querySelector('.close-gallery-modal');
+const galleryItems = document.querySelectorAll('.gallery-item');
+
+// Open gallery modal when image is clicked
+galleryItems.forEach(item => {
+    item.addEventListener('click', () => {
+        const imageSrc = item.querySelector('img').src;
+        galleryModalImage.src = imageSrc;
+        galleryModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+// Close gallery modal when X is clicked
+closeGalleryModal.addEventListener('click', () => {
+    galleryModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+});
+
+// Close gallery modal when clicking outside the image
+galleryModal.addEventListener('click', (e) => {
+    if (e.target === galleryModal) {
+        galleryModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Close gallery modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && galleryModal.classList.contains('active')) {
+        galleryModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
